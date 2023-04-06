@@ -21,6 +21,7 @@ const AuthProvider = ({ children }) => {
         token: parseData.token,
       });
     }
+    console.log(auth)
     //eslint-disable-next-line
   }, []);
   return (

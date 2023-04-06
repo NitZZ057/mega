@@ -16,6 +16,7 @@
   "dependencies": {
     "bcrypt": "^5.1.0",
     "braintree": "^3.13.0",
+    "cloudinary": "^1.35.0",
     "colors": "^1.4.0",
     "concurrently": "^7.6.0",
     "cors": "^2.8.5",

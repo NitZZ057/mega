@@ -8,9 +8,16 @@ import categoryRoutes from "./routes/categoryRoutes.js";
 import productRoutes from "./routes/productRoutes.js";
 import BlogRoutes from "./routes/BlogRoute.js";
 import cors from "cors";
-
+import cloudinary from "cloudinary";
 //configure env
 dotenv.config();
+
+//config clodinary
+cloudinary.config({
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_SECRET_KEY
+});
 
 //databse config
 connectDB();
@@ -27,7 +34,7 @@ app.use(morgan("dev"));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/category", categoryRoutes);
 app.use("/api/v1/product", productRoutes);
-app.use("/api/v1/blog",BlogRoutes);
+app.use("/api/v1/blog", BlogRoutes);
 
 
 //rest api

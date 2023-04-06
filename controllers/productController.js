@@ -5,6 +5,7 @@ import slugify from "slugify";
 import orderModel from "../models/orderModel.js";
 import braintree from "braintree";
 import dotenv from 'dotenv';
+import cloudinary from "cloudinary";
 
 
 dotenv.config();
@@ -23,7 +24,16 @@ export const createProductController = async (req, res) => {
     const { name, description, price, category, quantity, shipping } =
       req.fields;
     const { photo } = req.files;
-    //alidation
+
+    await cloudinary.uploader.upload(photo.path, {
+      folder: "product",
+      width: 150,
+      crop: "scale",
+    });
+    // console.log(photo);
+
+
+    //validation
     switch (true) {
       case !name:
         return res.status(500).send({ error: "Name is Required" });
@@ -112,6 +122,7 @@ export const getSingleProductController = async (req, res) => {
 export const productPhotoController = async (req, res) => {
   try {
     const product = await productModel.findById(req.params.pid).select("photo");
+
     if (product.photo.data) {
       res.set("Content-type", product.photo.contentType);
       return res.status(200).send(product.photo.data);
