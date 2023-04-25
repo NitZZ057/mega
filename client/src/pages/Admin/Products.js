@@ -10,8 +10,7 @@ const Products = () => {
   //getall products
   const getAllProducts = async () => {
     try {
-      console.log("problem");
-      const { data } = await axios.get("http://localhost:8080/api/v1/product/get-product");
+      const { data } = await axios.get("/api/v1/product/get-product");
       setProducts(data.products);
     } catch (error) {
       console.log(error);
